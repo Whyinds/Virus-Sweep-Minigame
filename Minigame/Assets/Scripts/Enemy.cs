@@ -9,12 +9,17 @@ public class Enemy : MonoBehaviour
     public int health = 1;
     public int attackDMG = 1;
 
+    public float aboveYProtection = 5.5f;
+
     bool gameOver = false;
+
+    OnDestroyAudio onDestroyAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerHealth.OnGameOver += StopEnemy;
+        onDestroyAudio = GetComponent<OnDestroyAudio>();
     }
 
     // Update is called once per frame
@@ -33,8 +38,9 @@ public class Enemy : MonoBehaviour
 
     public void LoseHealth(int damage = 1)
     {
+        if (transform.position.y > aboveYProtection) { return; }
         health -= damage;
-        if (health <= 0) { Destroy(gameObject); }
+        if (health <= 0) { onDestroyAudio.OnDelete(); Destroy(gameObject); }
     }
 
     void StopEnemy()

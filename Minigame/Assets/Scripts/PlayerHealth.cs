@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     public Canvas gameOverUI;
     public Image healthbarFill;
 
+    public AudioSource hitAudio;
+    public GameObject gameOverAudioObject;
+
     public static event Action OnGameOver;
 
     // Start is called before the first frame update
@@ -27,11 +30,14 @@ public class PlayerHealth : MonoBehaviour
     public void LoseHealth(int damage)
     {
         health -= damage;
+        if (hitAudio != null) { hitAudio.Play(); }
         SetHealthBar();
         if (health <= 0)
         {
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
+            var audioObject = Instantiate(gameOverAudioObject);
+            Destroy(audioObject, audioObject.GetComponent<AudioSource>().clip.length + 0.1f);
             gameObject.SetActive(false);
         }
     }

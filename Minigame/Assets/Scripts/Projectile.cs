@@ -10,16 +10,21 @@ public class Projectile : MonoBehaviour
 
     Rigidbody2D RGBProjectile;
     PlayerShooter player;
+    public AudioSource bounceAudio;
+    OnDestroyAudio onDestroyAudio;
 
     private Vector3 lastVelocity;
     private float curSpeed;
     private Vector3 direction;
     int curBounces = 0;
 
+    bool despawning = false;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerShooter>();
         RGBProjectile = GetComponent<Rigidbody2D>();
+        onDestroyAudio = GetComponent<OnDestroyAudio>();
 
         PlayerHealth.OnGameOver += DeleteProjectile;
     }
@@ -31,7 +36,7 @@ public class Projectile : MonoBehaviour
 
     void DeleteProjectile()
     {
-        Destroy(gameObject);
+        OnDelete();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,29 +44,32 @@ public class Projectile : MonoBehaviour
         if (collision.GetComponent<Enemy>())
         {
             collision.GetComponent<Enemy>().LoseHealth(damage);
-            Destroy(gameObject);
         } else if (collision.gameObject.tag == "Despawner")
         {
-            Destroy(gameObject);
+            OnDelete();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (curBounces > numOfBounces) { Destroy(gameObject); }
+        curBounces++;
+        if (curBounces > numOfBounces) { onDestroyAudio.OnDelete(); OnDelete(); }
+        if (bounceAudio != null && !despawning) { bounceAudio.Play(); }
 
         curSpeed = lastVelocity.magnitude;
         direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         RGBProjectile.velocity = direction * Mathf.Max(curSpeed,0);
 
-        curBounces++;
+        
     }
 
 
-    private void OnDestroy()
+    private void OnDelete()
     {
+        despawning = true;
         player.currentProjectiles--;
         PlayerHealth.OnGameOver -= DeleteProjectile;
+        Destroy(gameObject);
     }
 
 }
