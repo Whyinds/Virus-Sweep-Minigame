@@ -11,7 +11,6 @@ public class PlayerShooter : MonoBehaviour
     public AudioSource shootSound;
     public Transform launchPoint;
     public float launchSpeed = 10f;
-    public float secondsToDespawn = 5f;
     public float maxProjectiles = 3f;
     [HideInInspector] public float currentProjectiles = 0f;
 
@@ -55,8 +54,6 @@ public class PlayerShooter : MonoBehaviour
 
             var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
             _projectile.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
-            
-            Destroy(_projectile, secondsToDespawn);
         }
     }
 
@@ -83,5 +80,10 @@ public class PlayerShooter : MonoBehaviour
         gameOver = true;
     }
 
+    public void removeProjectile()
+    {
+        currentProjectiles--;
+        if (currentProjectiles < 0) { currentProjectiles = 0; }
+    }
 
 }

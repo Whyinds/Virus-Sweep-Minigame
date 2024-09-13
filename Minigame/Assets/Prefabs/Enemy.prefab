@@ -103,6 +103,9 @@ MonoBehaviour:
   moveSpeed: 1
   health: 1
   attackDMG: 1
+  scoreAmout: 100
+  aboveYProtection: 5.5
+  miniScoreDisplayPrefab: {fileID: 754410271099227886, guid: 2f52351d659c41e43bc20527b1034521, type: 3}
 --- !u!58 &3859002719699513855
 CircleCollider2D:
   m_ObjectHideFlags: 0

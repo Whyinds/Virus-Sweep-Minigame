@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
     public void LoseHealth(int damage)
     {
         health -= damage;
-        if (hitAudio != null) { hitAudio.Play(); }
+        
         SetHealthBar();
         if (health <= 0)
         {
@@ -39,7 +39,10 @@ public class PlayerHealth : MonoBehaviour
             var audioObject = Instantiate(gameOverAudioObject);
             Destroy(audioObject, audioObject.GetComponent<AudioSource>().clip.length + 0.1f);
             gameObject.SetActive(false);
+            return;
         }
+
+        if (hitAudio != null) { hitAudio.Play(); }
     }
 
     public void GainHealth(int restored)

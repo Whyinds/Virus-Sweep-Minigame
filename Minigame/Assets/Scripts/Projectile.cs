@@ -16,7 +16,8 @@ public class Projectile : MonoBehaviour
     private Vector3 lastVelocity;
     private float curSpeed;
     private Vector3 direction;
-    int curBounces = 0;
+    public int curBounces = 0;
+    public int curEnemiesHit = 0;
 
     bool despawning = false;
 
@@ -43,7 +44,9 @@ public class Projectile : MonoBehaviour
     {
         if (collision.GetComponent<Enemy>())
         {
-            collision.GetComponent<Enemy>().LoseHealth(damage);
+            if (collision.GetComponent<Enemy>().isDead) { return; }
+            curEnemiesHit++;
+            collision.GetComponent<Enemy>().LoseHealth(damage, this);
         } else if (collision.gameObject.tag == "Despawner")
         {
             OnDelete();
@@ -67,7 +70,7 @@ public class Projectile : MonoBehaviour
     private void OnDelete()
     {
         despawning = true;
-        player.currentProjectiles--;
+        player.removeProjectile();
         PlayerHealth.OnGameOver -= DeleteProjectile;
         Destroy(gameObject);
     }
