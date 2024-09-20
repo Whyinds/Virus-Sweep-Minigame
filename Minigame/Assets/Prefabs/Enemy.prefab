@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5551573821421358339}
   - component: {fileID: 7660775265727173578}
   - component: {fileID: 1579806887042829269}
+  - component: {fileID: 8274626091627157889}
   - component: {fileID: 3859002719699513855}
   - component: {fileID: 7468931592228876148}
-  - component: {fileID: 8274626091627157889}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -105,7 +105,21 @@ MonoBehaviour:
   attackDMG: 1
   scoreAmout: 100
   aboveYProtection: 5.5
+  isDead: 0
   miniScoreDisplayPrefab: {fileID: 754410271099227886, guid: 2f52351d659c41e43bc20527b1034521, type: 3}
+--- !u!114 &8274626091627157889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648624826067600319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219fbca1edc0abf48b91385372882e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioObjectToSpawn: {fileID: 5084351714971859372, guid: b37402397402cc74286e52f4188f48e1, type: 3}
 --- !u!58 &3859002719699513855
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,16 +182,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8274626091627157889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8648624826067600319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219fbca1edc0abf48b91385372882e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObjectToSpawn: {fileID: 5084351714971859372, guid: b37402397402cc74286e52f4188f48e1, type: 3}

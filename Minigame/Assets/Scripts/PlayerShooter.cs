@@ -14,11 +14,6 @@ public class PlayerShooter : MonoBehaviour
     public float maxProjectiles = 3f;
     [HideInInspector] public float currentProjectiles = 0f;
 
-    [Header("***Trajectory Display***")]
-    public LineRenderer lineRenderer;
-    public int linePoints = 175;
-    public float timeIntervalPoints = 0.01f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +25,6 @@ public class PlayerShooter : MonoBehaviour
     {
         if (!gameOver) {
             FollowMouse();
-            DrawTrajectory();
             ShootProjectile();
         }
     }
@@ -57,33 +51,16 @@ public class PlayerShooter : MonoBehaviour
         }
     }
 
-    void DrawTrajectory()
-    {
-        if (lineRenderer == null) { return; }
-        Vector2 origin = launchPoint.position;
-        Vector2 startVelocity = launchSpeed * launchPoint.up;
-        lineRenderer.positionCount = linePoints;
-        float time = 0;
-
-        for (int i = 0; i < linePoints; i++)
-        {
-            var x = (startVelocity.x * time);
-            var y = (startVelocity.y * time);
-            Vector2 point = new Vector2(x, y);
-            lineRenderer.SetPosition(i, origin + point);
-            time += timeIntervalPoints;
-        }
-    }
+    
 
     void StopPlayer()
     {
         gameOver = true;
     }
 
-    public void removeProjectile()
+    public void CountProjectile()
     {
-        currentProjectiles--;
-        if (currentProjectiles < 0) { currentProjectiles = 0; }
+        currentProjectiles = FindObjectsOfType<Projectile>().Length;
     }
 
 }

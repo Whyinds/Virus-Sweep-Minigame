@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
+    [Header("Basic Settings")]
     public int damage = 1;
     public int numOfBounces = 3;
 
@@ -16,10 +16,14 @@ public class Projectile : MonoBehaviour
     private Vector3 lastVelocity;
     private float curSpeed;
     private Vector3 direction;
-    public int curBounces = 0;
-    public int curEnemiesHit = 0;
+    [HideInInspector] public int curBounces = 0;
+    [HideInInspector] public int curEnemiesHit = 0;
 
     bool despawning = false;
+
+    [Header("Bounce Boosts")]
+    public float speedMultiplier = 1.25f;
+    public float damageMultiplier = 2f;
 
     private void Start()
     {
@@ -42,8 +46,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.GetComponent<Enemy>())
         {
+            
             if (collision.GetComponent<Enemy>().isDead) { return; }
             curEnemiesHit++;
             collision.GetComponent<Enemy>().LoseHealth(damage, this);
@@ -59,7 +65,8 @@ public class Projectile : MonoBehaviour
         if (curBounces > numOfBounces) { onDestroyAudio.OnDelete(); OnDelete(); }
         if (bounceAudio != null && !despawning) { bounceAudio.Play(); }
 
-        curSpeed = lastVelocity.magnitude;
+        curSpeed = lastVelocity.magnitude * speedMultiplier;
+        damage = Mathf.CeilToInt(damage*damageMultiplier);
         direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         RGBProjectile.velocity = direction * Mathf.Max(curSpeed,0);
 
@@ -70,9 +77,13 @@ public class Projectile : MonoBehaviour
     private void OnDelete()
     {
         despawning = true;
-        player.removeProjectile();
         PlayerHealth.OnGameOver -= DeleteProjectile;
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        player.CountProjectile();
     }
 
 }

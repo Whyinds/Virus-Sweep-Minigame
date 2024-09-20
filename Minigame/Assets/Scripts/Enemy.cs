@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -16,7 +17,6 @@ public class Enemy : MonoBehaviour
     public bool isDead = false;
 
     OnDestroyAudio onDestroyAudio;
-    Projectile projectile;
     public GameObject miniScoreDisplayPrefab;
 
     // Start is called before the first frame update
@@ -43,11 +43,13 @@ public class Enemy : MonoBehaviour
     public void LoseHealth(int damage = 1, Projectile bullet = null)
     {
         if (isDead) { return; }
-        isDead = true;
         if (transform.position.y > aboveYProtection) { return; }
+        
         health -= damage;
         if (health <= 0) {
+            isDead = true;
             DisplayScoreAdded(bullet);
+            onDestroyAudio.OnDelete();
             Destroy(gameObject); }
     }
 
@@ -58,11 +60,10 @@ public class Enemy : MonoBehaviour
 
     void DisplayScoreAdded(Projectile bullet)
     {
-        var score = FindObjectOfType<ScoreManager>();
 
         int addedScore = scoreAmout * bullet.curEnemiesHit * (bullet.curBounces + 1);
 
-        score.AddScore(addedScore);
+        ScoreManager.Instance.AddScore(addedScore);
 
         var miniScoreDisplay = Instantiate(miniScoreDisplayPrefab, transform.position, Quaternion.identity);
         miniScoreDisplay.GetComponent<MiniScoreText>().scoreAmount = addedScore;
