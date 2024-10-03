@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnRateMin = 0.5f;
     public float SpawnRateMax = 3f;
 
+    float moveRate = 1f;
+
     bool spawnEnemy = true;
     bool waitingToSpawn = false;
 
@@ -41,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(Random.Range(XSpawnRange * -1, XSpawnRange), transform.position.y);
             var enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            enemy.GetComponent<Enemy>().moveSpeed *= moveRate;
         }
         
     }
@@ -48,5 +51,22 @@ public class EnemySpawner : MonoBehaviour
     void StopSpawning()
     {
         spawnEnemy = false;
+    }
+
+    public void IncreaseSpawnRate(float amount=0.07f)
+    {
+        SpawnRateMin -= amount;
+        SpawnRateMax -= amount*3;
+
+        moveRate += 0.35f;
+
+        if (SpawnRateMin <= 0)
+        {
+            SpawnRateMin = 0.05f;
+        }
+        if (SpawnRateMax <= 0)
+        {
+            SpawnRateMax = SpawnRateMin + 0.5f;
+        }
     }
 }
