@@ -5,17 +5,11 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
 
     public int score = 0;
     public TextMeshProUGUI gameOverScoreText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverHighScoreText;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -46,6 +40,11 @@ public class ScoreManager : MonoBehaviour
         {
             gameOverHighScoreText.SetText("Highscore: " + PlayerPrefs.GetInt("HighScore", 0));
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerHealth.OnGameOver -= SetGameOverScore;
     }
 
 }

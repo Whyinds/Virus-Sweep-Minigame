@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
 
         int addedScore = scoreAmout * bullet.curEnemiesHit * (bullet.curBounces + 1);
 
-        ScoreManager.Instance.AddScore(addedScore);
+        FindObjectOfType<ScoreManager>().AddScore(addedScore);
 
         var miniScoreDisplay = Instantiate(miniScoreDisplayPrefab, transform.position, Quaternion.identity);
         miniScoreDisplay.GetComponent<MiniScoreText>().scoreAmount = addedScore;

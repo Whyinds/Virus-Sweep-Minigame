@@ -8,6 +8,8 @@ public class PlayerShooter : MonoBehaviour
 
     public static PlayerShooter instance;
 
+    Animator animator;
+
     [Header("***Projectile***")]
     public GameObject projectile;
     public AudioSource shootSound;
@@ -32,7 +34,7 @@ public class PlayerShooter : MonoBehaviour
     void Start()
     {
         PlayerHealth.OnGameOver += StopPlayer;
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,11 @@ public class PlayerShooter : MonoBehaviour
 
     void FollowMouse()
     {
+        if (currentProjectiles >= maxProjectiles)
+        {
+            transform.rotation = Quaternion.identity;
+            return;
+        }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         Vector2 directionToFace = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = directionToFace;
@@ -57,9 +64,13 @@ public class PlayerShooter : MonoBehaviour
         {
             if (projectile == null) { return; }
 
+            
+
             currentProjectiles++;
 
             shootSound.Play();
+
+            CheckAnimation();
 
             var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
             _projectile.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
@@ -76,6 +87,7 @@ public class PlayerShooter : MonoBehaviour
     public void CountProjectile()
     {
         currentProjectiles = FindObjectsOfType<Projectile>().Length;
+        CheckAnimation();
     }
 
     public void AddProjectileAmountUpgrade()
@@ -84,6 +96,8 @@ public class PlayerShooter : MonoBehaviour
         maxProjectiles++;
         currentProjectileUpgrades++;
 
+        CheckAnimation();
+
         var enemySpawnObj = Instantiate(FindObjectOfType<EnemySpawner>().gameObject);
 
         var allSpawners = FindObjectsOfType<EnemySpawner>();
@@ -91,6 +105,19 @@ public class PlayerShooter : MonoBehaviour
         foreach (EnemySpawner spawns in allSpawners)
         {
             spawns.IncreaseSpawnRate();
+        }
+    }
+
+    void CheckAnimation()
+    {
+        if (animator == null) { return; }
+        if (currentProjectiles < maxProjectiles)
+        {
+            animator.SetBool("HasBalls", true);
+        }
+        else if (currentProjectiles >= maxProjectiles)
+        {
+            animator.SetBool("HasBalls", false);
         }
     }
 
