@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed *= EnemyManager.instance.EnemyMoveSpeedMult;
         PlayerHealth.OnGameOver += StopEnemy;
         onDestroyAudio = GetComponent<OnDestroyAudio>();
     }

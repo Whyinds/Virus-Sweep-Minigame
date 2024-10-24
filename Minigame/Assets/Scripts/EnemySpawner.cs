@@ -10,16 +10,16 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnRateMin = 0.5f;
     public float SpawnRateMax = 3f;
 
-    float moveRate = 1f;
-
     bool spawnEnemy = true;
     bool waitingToSpawn = false;
+
+    List<GameObject> EnemyGroupList;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerHealth.OnGameOver += StopSpawning;
-
+        EnemyGroupList = EnemyManager.instance.GetEnemyGroups();
         if (XSpawnRange < 0) { XSpawnRange *= -1; }
     }
 
@@ -41,9 +41,16 @@ public class EnemySpawner : MonoBehaviour
         // If game over while waiting
         if (spawnEnemy)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(XSpawnRange * -1, XSpawnRange), transform.position.y);
-            var enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().moveSpeed *= moveRate;
+            if (Random.Range(0, 15) <= 4)
+            {
+                var groupChoice = EnemyGroupList[Random.Range(0, EnemyGroupList.Count)];
+                Instantiate(groupChoice, transform.position, Quaternion.identity);
+            } else
+            {
+                Vector3 spawnPos = new Vector3(Random.Range(XSpawnRange * -1, XSpawnRange), transform.position.y);
+                var enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            }
+            
         }
         
     }
@@ -58,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
         SpawnRateMin -= amount;
         SpawnRateMax -= amount*3;
 
-        moveRate += 0.35f;
+        
 
         if (SpawnRateMin <= 0)
         {

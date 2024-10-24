@@ -98,14 +98,8 @@ public class PlayerShooter : MonoBehaviour
 
         CheckAnimation();
 
-        var enemySpawnObj = Instantiate(FindObjectOfType<EnemySpawner>().gameObject);
-
-        var allSpawners = FindObjectsOfType<EnemySpawner>();
-
-        foreach (EnemySpawner spawns in allSpawners)
-        {
-            spawns.IncreaseSpawnRate();
-        }
+        FindObjectOfType<EnemySpawner>().IncreaseSpawnRate();
+        EnemyManager.instance.IncreaseEnemyMoveRate();
     }
 
     void CheckAnimation()

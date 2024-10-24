@@ -1306,6 +1306,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &978153466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 978153468}
+  - component: {fileID: 978153467}
+  m_Layer: 0
+  m_Name: Enemy Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &978153467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978153466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065de4f2aabbbce45ac42eb4316ae9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyMoveSpeedMult: 1
+  MultIncreaseRate: 0.25
+  EnemyGroups:
+  - {fileID: 5743349680637077599, guid: c11bd1c223811b0418ee3bd7f61cbcec, type: 3}
+  - {fileID: 2484989226501846312, guid: 0cf10a1195e48684897067d06aa6d9bc, type: 3}
+  - {fileID: 6862541807014092325, guid: e9e7286fc233b8f40bbc21cdff73c71d, type: 3}
+  - {fileID: 4739153022510692800, guid: 0e7d9572585d1374bab04c09500205d0, type: 3}
+  - {fileID: 6177909125057554112, guid: 4970bbd6c0683d54a98219e709d1629c, type: 3}
+  - {fileID: 378454104568364548, guid: 142ec4c100bd7994e9a6d4fba16a08d2, type: 3}
+  - {fileID: 4521230946773682989, guid: ff05ffc29138c77438125d966cd3e1ae, type: 3}
+  - {fileID: 6177909125057554112, guid: a81aeb88332d18c44b0a900f709f836b, type: 3}
+  - {fileID: 6177909125057554112, guid: 6638f4c9a3ef2a1408728a9318a14d74, type: 3}
+  - {fileID: 378454104568364548, guid: e23fd784c2189b5429d6ac0cc1b7917f, type: 3}
+  - {fileID: 378454104568364548, guid: c173d672017413e4b9ebe17519372d59, type: 3}
+--- !u!4 &978153468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978153466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3875037, y: 0.66091347, z: 0.71102107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1111779229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,6 +2728,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1760440773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760440775}
+  - component: {fileID: 1760440774}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1760440774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760440773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab63b60d2ec5bb4f9fb888a59d3c558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1760440775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760440773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3875037, y: 0.66091347, z: 0.71102107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1768769748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,7 +3255,7 @@ GameObject:
   m_Layer: 0
   m_Name: Enemy Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3497,3 +3599,5 @@ SceneRoots:
   - {fileID: 1540922833}
   - {fileID: 1630925262}
   - {fileID: 1111779231}
+  - {fileID: 1760440775}
+  - {fileID: 978153468}
