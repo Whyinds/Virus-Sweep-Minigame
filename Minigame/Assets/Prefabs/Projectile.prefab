@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  numOfBounces: 4
+  numOfBounces: 2
   bounceAudio: {fileID: 1162138509423838985}
   curBounces: 0
   curEnemiesHit: 0

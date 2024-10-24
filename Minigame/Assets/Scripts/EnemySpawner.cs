@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         // If game over while waiting
         if (spawnEnemy)
         {
-            if (Random.Range(0, 15) <= 4)
+            if (Random.Range(0, 15) <= 10)
             {
                 var groupChoice = EnemyGroupList[Random.Range(0, EnemyGroupList.Count)];
                 Instantiate(groupChoice, transform.position, Quaternion.identity);
@@ -60,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
         spawnEnemy = false;
     }
 
-    public void IncreaseSpawnRate(float amount=0.07f)
+    public void IncreaseSpawnRate(float amount=0.5f)
     {
         SpawnRateMin -= amount;
         SpawnRateMax -= amount*3;
