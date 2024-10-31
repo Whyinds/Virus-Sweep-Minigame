@@ -38,6 +38,8 @@ public class PowerUp : MonoBehaviour
             GivePowerUp();
             GetComponent<OnDestroyAudio>().OnDelete();
 
+            UpgradeSpawner.Instance.IncreaseSpawnTime();
+
             var miniDisplay = Instantiate(MiniTextUpgradeDisplay, transform.position, Quaternion.identity);
             Destroy(miniDisplay, 1f);
 

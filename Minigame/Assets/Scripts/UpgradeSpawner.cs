@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class UpgradeSpawner : MonoBehaviour
 {
+    public static UpgradeSpawner Instance;
+    
     public float XSpawnRange = 6f;
-    public GameObject upgradePrefab;
+    public List<GameObject> upgradePrefabs;
     public float SpawnRateMin = 40f;
     public float SpawnRateMax = 60f;
 
@@ -15,6 +17,8 @@ public class UpgradeSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
+
         PlayerHealth.OnGameOver += StopSpawning;
 
         if (XSpawnRange < 0) { XSpawnRange *= -1; }
@@ -38,8 +42,10 @@ public class UpgradeSpawner : MonoBehaviour
         // If game over while waiting
         if (spawnUpgrade)
         {
+            var randomUpgrade = upgradePrefabs[Random.Range(0, upgradePrefabs.Count)];
+
             Vector3 spawnPos = new Vector3(Random.Range(XSpawnRange * -1, XSpawnRange), transform.position.y);
-            var upgrade = Instantiate(upgradePrefab, spawnPos, Quaternion.identity);
+            var upgrade = Instantiate(randomUpgrade, spawnPos, Quaternion.identity);
         }
 
     }
@@ -47,6 +53,12 @@ public class UpgradeSpawner : MonoBehaviour
     void StopSpawning()
     {
         spawnUpgrade = false;
+    }
+
+    public void IncreaseSpawnTime(float amount=2f)
+    {
+        SpawnRateMin += amount;
+        SpawnRateMax += amount;
     }
 
 }

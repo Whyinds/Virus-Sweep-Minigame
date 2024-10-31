@@ -74,6 +74,18 @@ public class PlayerShooter : MonoBehaviour
 
             var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
             _projectile.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+
+            if (GameManager.Instance.TriShotEnabled)
+            {
+                var _projectileTwo = Instantiate(projectile, launchPoint.position, launchPoint.rotation *= Quaternion.Euler(0, 0, 15));
+                _projectileTwo.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+
+                var _projectileThree = Instantiate(projectile, launchPoint.position, launchPoint.rotation *= Quaternion.Euler(0, 0, -30));
+                _projectileThree.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+
+                launchPoint.rotation *= Quaternion.Euler(0, 0, 15);
+            }
+            
         }
     }
 
