@@ -5,11 +5,20 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance;
 
     public int score = 0;
     public TextMeshProUGUI gameOverScoreText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverHighScoreText;
+
+    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI allCoins;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -23,10 +32,16 @@ public class ScoreManager : MonoBehaviour
         scoreText.SetText("Score: " + score);
     }
 
+    public void AddCoin()
+    {
+        coinText.SetText("Coins: " + GameManager.Instance.coinsCollected);
+    }
+
     void SetGameOverScore()
     {
         scoreText.GetComponentInParent<Canvas>().enabled = false;
         gameOverScoreText.SetText("Score: " + score);
+        allCoins.SetText("Total Coins: " + PlayerPrefs.GetInt("coins"));
         SetHighScore();
     }
 
