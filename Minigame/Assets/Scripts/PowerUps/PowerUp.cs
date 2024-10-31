@@ -57,4 +57,10 @@ public class PowerUp : MonoBehaviour
         gameOver = true; 
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        PlayerHealth.OnGameOver -= StopUpgrade;
+    }
+
 }

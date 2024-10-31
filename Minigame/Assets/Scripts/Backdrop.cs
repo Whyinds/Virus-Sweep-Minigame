@@ -24,17 +24,6 @@ public class Backdrop : MonoBehaviour
 
     public void SetNewBG()
     {
-        int newBGID = PlayerPrefs.GetInt("BG") + 1;
-
-        if (newBGID >= BGs.Count)
-        {
-            newBGID = 0;
-        }
-
-        PlayerPrefs.SetInt("BG", newBGID);
-
-        SetBG();
-
 
         var coinCount = PlayerPrefs.GetInt("coins");
 
@@ -43,12 +32,12 @@ public class Backdrop : MonoBehaviour
             PlayerPrefs.SetInt("coins", coinCount - 15);
             MainMenu.instance.ResetCoins();
 
-            //int newBGID = PlayerPrefs.GetInt("BG") + 1;
+            int newBGID = PlayerPrefs.GetInt("BG") + 1;
 
-            //if (newBGID >= BGs.Count)
-            //{
-            //    newBGID = 0;
-            //}
+            if (newBGID >= BGs.Count)
+            {
+                newBGID = 0;
+            }
 
             PlayerPrefs.SetInt("BG", newBGID);
 

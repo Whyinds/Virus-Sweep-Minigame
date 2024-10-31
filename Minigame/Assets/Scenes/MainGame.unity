@@ -1095,7 +1095,7 @@ MonoBehaviour:
   scoreText: {fileID: 1612832277}
   gameOverHighScoreText: {fileID: 1271744368}
   coinText: {fileID: 1826510157}
-  allCoins: {fileID: 0}
+  allCoins: {fileID: 943223493}
 --- !u!1 &969779828
 GameObject:
   m_ObjectHideFlags: 0
