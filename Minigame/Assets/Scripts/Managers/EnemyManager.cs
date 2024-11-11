@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> EnemyGroups;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

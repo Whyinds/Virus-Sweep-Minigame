@@ -1,23 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
 
     public float XSpawnRange = 6f;
-    public GameObject enemyPrefab;
     public float SpawnRateMin = 0.5f;
     public float SpawnRateMax = 3f;
 
     bool spawnEnemy = true;
     bool waitingToSpawn = false;
 
+    public int currentWave = 0;
+    public int wavesToBoss = 15;
+
     List<GameObject> EnemyGroupList;
+
+    public GameObject BossPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         PlayerHealth.OnGameOver += StopSpawning;
         EnemyGroupList = EnemyManager.instance.GetEnemyGroups();
         if (XSpawnRange < 0) { XSpawnRange *= -1; }
@@ -41,21 +48,21 @@ public class EnemySpawner : MonoBehaviour
         // If game over while waiting
         if (spawnEnemy)
         {
-            if (Random.Range(0, 15) <= 10)
+            if (currentWave % wavesToBoss != 0 || currentWave < wavesToBoss)
             {
                 var groupChoice = EnemyGroupList[Random.Range(0, EnemyGroupList.Count)];
                 Instantiate(groupChoice, transform.position, Quaternion.identity);
+                
             } else
             {
-                Vector3 spawnPos = new Vector3(Random.Range(XSpawnRange * -1, XSpawnRange), transform.position.y);
-                var enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                Instantiate(BossPrefab, transform.position, Quaternion.identity);
             }
-            
+            currentWave++;
         }
         
     }
 
-    void StopSpawning()
+    public void StopSpawning()
     {
         spawnEnemy = false;
     }

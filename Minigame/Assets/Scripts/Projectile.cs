@@ -66,7 +66,7 @@ public class Projectile : MonoBehaviour
         if (bounceAudio != null && !despawning) { bounceAudio.Play(); }
 
         curSpeed = lastVelocity.magnitude * speedMultiplier;
-        damage = Mathf.CeilToInt(damage*damageMultiplier);
+        //damage = Mathf.CeilToInt(damage*damageMultiplier);
         direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         RGBProjectile.velocity = direction * Mathf.Max(curSpeed,0);
 

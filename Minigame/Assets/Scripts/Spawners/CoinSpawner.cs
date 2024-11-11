@@ -49,7 +49,7 @@ public class CoinSpawner : MonoBehaviour
 
     }
 
-    void StopSpawning()
+    public void StopSpawning()
     {
         spawnCoin = false;
     }

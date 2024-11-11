@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -19,12 +20,24 @@ public class PlayerHealth : MonoBehaviour
 
     public static event Action OnGameOver;
 
+    public TextMeshProUGUI fileNameText;
+
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("losses"))
+        {
+            PlayerPrefs.SetInt("losses", 0);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         gameOverUI.enabled = false;
         healthbarFill.fillAmount = 1;
+
+        fileNameText.text = "Mom's Credit Card #" + (PlayerPrefs.GetInt("losses") + 1).ToString();
     }
 
     public void LoseHealth(int damage)
@@ -32,8 +45,12 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         
         SetHealthBar();
+
+        FindObjectOfType<CameraShake>().shakeDuration += 0.1f;
+
         if (health <= 0)
         {
+            PlayerPrefs.SetInt("losses", PlayerPrefs.GetInt("losses")+1);
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
             var audioObject = Instantiate(gameOverAudioObject);

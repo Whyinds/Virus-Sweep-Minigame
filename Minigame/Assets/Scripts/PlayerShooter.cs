@@ -23,7 +23,6 @@ public class PlayerShooter : MonoBehaviour
     [HideInInspector] public float currentProjectileUpgrades = 0f;
     public float trajectoryLineDuration = 10f;
     public GameObject specialProjectile;
-    bool canShootSpecial = false;
 
     private void Awake()
     {
@@ -91,7 +90,7 @@ public class PlayerShooter : MonoBehaviour
 
     
 
-    void StopPlayer()
+    public void StopPlayer()
     {
         gameOver = true;
     }

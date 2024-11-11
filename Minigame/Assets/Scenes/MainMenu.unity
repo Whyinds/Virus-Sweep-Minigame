@@ -382,7 +382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Coins: 9999999'
+  m_text: 'Credits: 9999999'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1309,7 +1309,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Switch Background
 
-    (15 Coins)'
+    (15 Credits)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1578,12 +1578,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: b31c41ecf4f51ce41af741761c4b38c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eccc32cb6d18e314daacaf44a58ae158, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1617,9 +1617,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGs:
-  - {fileID: 21300000, guid: b31c41ecf4f51ce41af741761c4b38c1, type: 3}
+  - {fileID: 21300000, guid: eccc32cb6d18e314daacaf44a58ae158, type: 3}
   - {fileID: 21300000, guid: e2adf69a18835de4dae817db2f1aa486, type: 3}
   - {fileID: 21300000, guid: cf848683572f9cf41a6b1f8a74a677f0, type: 3}
+  - {fileID: 21300000, guid: d9d0cb5d3963ade43b6f3bea736ad134, type: 3}
+  - {fileID: 21300000, guid: bcccfcb1fa14b1343b7a7b362c79c5d1, type: 3}
 --- !u!1 &1034742709
 GameObject:
   m_ObjectHideFlags: 0

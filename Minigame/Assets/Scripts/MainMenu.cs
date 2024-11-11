@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void ResetCoins()
     {
-        coins.SetText("Coins: " + PlayerPrefs.GetInt("coins"));
+        coins.SetText("Credits: " + PlayerPrefs.GetInt("coins"));
     }
 
 }

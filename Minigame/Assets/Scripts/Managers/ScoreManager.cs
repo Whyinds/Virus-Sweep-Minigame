@@ -34,14 +34,14 @@ public class ScoreManager : MonoBehaviour
 
     public void AddCoin()
     {
-        coinText.SetText("Coins: " + GameManager.Instance.coinsCollected);
+        coinText.SetText("Credits: " + GameManager.Instance.coinsCollected);
     }
 
     void SetGameOverScore()
     {
         scoreText.GetComponentInParent<Canvas>().enabled = false;
         gameOverScoreText.SetText("Score: " + score);
-        allCoins.SetText("Total Coins: " + PlayerPrefs.GetInt("coins"));
+        allCoins.SetText("Total Credits: " + PlayerPrefs.GetInt("coins"));
         SetHighScore();
     }
 
@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour
         if (score > PlayerPrefs.GetInt("HighScore", 0))
         {
             PlayerPrefs.SetInt("HighScore", score);
-            gameOverHighScoreText.SetText("NEW Highscore: " + score);
+            gameOverHighScoreText.SetText("Highscore: " + score);
         } else
         {
             gameOverHighScoreText.SetText("Highscore: " + PlayerPrefs.GetInt("HighScore", 0));

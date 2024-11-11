@@ -22,9 +22,14 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed *= EnemyManager.instance.EnemyMoveSpeedMult;
-        PlayerHealth.OnGameOver += StopEnemy;
         onDestroyAudio = GetComponent<OnDestroyAudio>();
+        PlayerHealth.OnGameOver += StopEnemy;
+        moveSpeed *= EnemyManager.instance.EnemyMoveSpeedMult;
+
+        if (GameManager.Instance.wonGame)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -47,11 +52,19 @@ public class Enemy : MonoBehaviour
         if (transform.position.y > aboveYProtection) { return; }
         
         health -= damage;
+        
         if (health <= 0) {
             isDead = true;
             DisplayScoreAdded(bullet);
             onDestroyAudio.OnDelete();
             Destroy(gameObject); }
+        else { DoActionOnHit(); }
+        
+    }
+
+    public virtual void DoActionOnHit()
+    {
+
     }
 
     void StopEnemy()

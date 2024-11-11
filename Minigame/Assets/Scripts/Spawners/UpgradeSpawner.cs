@@ -50,7 +50,7 @@ public class UpgradeSpawner : MonoBehaviour
 
     }
 
-    void StopSpawning()
+    public void StopSpawning()
     {
         spawnUpgrade = false;
     }
