@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   distance:
     m_OverrideState: 1
-    m_Value: 0.021
+    m_Value: 0
   cropToFit:
     m_OverrideState: 1
     m_Value: 0
@@ -37,16 +37,16 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.11
+    m_Value: 0.77
   intensity:
     m_OverrideState: 1
-    m_Value: 1.17
+    m_Value: 1.81
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
   clamp:
     m_OverrideState: 0
-    m_Value: 65472
+    m_Value: 65460.83
   tint:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -60,8 +60,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: c82c925a02f4a36419da6e889eeae992, type: 3}
     dimension: 1
   dirtIntensity:
     m_OverrideState: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   intensity:
     m_OverrideState: 1
-    m_Value: 0.863
+    m_Value: 0.557
   response:
     m_OverrideState: 1
     m_Value: 1

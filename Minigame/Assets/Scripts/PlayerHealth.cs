@@ -8,6 +8,7 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance;
 
     public float maxHealth = 10;
     [HideInInspector] public float health;
@@ -22,8 +23,11 @@ public class PlayerHealth : MonoBehaviour
 
     public TextMeshProUGUI fileNameText;
 
+    public GameObject ParticlesOnDefeat;
+
     private void Awake()
     {
+        Instance = this;
         if (!PlayerPrefs.HasKey("losses"))
         {
             PlayerPrefs.SetInt("losses", 0);
@@ -51,8 +55,11 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             PlayerPrefs.SetInt("losses", PlayerPrefs.GetInt("losses")+1);
+            Camera.main.GetComponent<CameraShake>().shakeDuration += 0.5f;
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
+            var particles = Instantiate(ParticlesOnDefeat, transform.position, Quaternion.identity);
+            Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration + 1f);
             var audioObject = Instantiate(gameOverAudioObject);
             Destroy(audioObject, audioObject.GetComponent<AudioSource>().clip.length + 0.1f);
             gameObject.SetActive(false);

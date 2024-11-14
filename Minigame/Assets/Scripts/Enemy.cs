@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     OnDestroyAudio onDestroyAudio;
     public GameObject miniScoreDisplayPrefab;
+    public GameObject ParticlesOnDefeat;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,8 @@ public class Enemy : MonoBehaviour
             isDead = true;
             DisplayScoreAdded(bullet);
             onDestroyAudio.OnDelete();
+            var particles = Instantiate(ParticlesOnDefeat, transform.position, Quaternion.identity);
+            Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration + 1f);
             Destroy(gameObject); }
         else { DoActionOnHit(); }
         

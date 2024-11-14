@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
                 
             } else
             {
-                Instantiate(BossPrefab, transform.position, Quaternion.identity);
+                Instantiate(BossPrefab, transform.position + new Vector3(0, 1), Quaternion.identity);
             }
             currentWave++;
         }
