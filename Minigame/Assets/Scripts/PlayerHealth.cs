@@ -56,6 +56,7 @@ public class PlayerHealth : MonoBehaviour
         {
             PlayerPrefs.SetInt("losses", PlayerPrefs.GetInt("losses")+1);
             Camera.main.GetComponent<CameraShake>().shakeDuration += 0.5f;
+            Camera.main.GetComponent<CameraShake>().shakeAmount += 0.3f;
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
             var particles = Instantiate(ParticlesOnDefeat, transform.position, Quaternion.identity);
