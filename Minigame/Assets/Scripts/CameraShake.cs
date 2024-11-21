@@ -13,6 +13,9 @@ public class CameraShake : MonoBehaviour
 	// Amplitude of the shake. A larger value shakes the camera harder.
 	public float shakeAmount = 0.7f;
 	public float decreaseFactor = 1.0f;
+
+	public bool GameDone = false;
+	public bool canShake = true;
 	
 	Vector3 originalPos;
 	
@@ -22,7 +25,15 @@ public class CameraShake : MonoBehaviour
 		{
 			camTransform = GetComponent(typeof(Transform)) as Transform;
 		}
-	}
+        
+		if (PlayerPrefs.GetInt("Shake") == 1)
+		{
+			canShake = true;
+		} else
+		{
+			canShake = false;
+		}
+    }
 	
 	void OnEnable()
 	{
@@ -31,7 +42,7 @@ public class CameraShake : MonoBehaviour
 
 	void Update()
 	{
-		if (shakeDuration > 0)
+		if (shakeDuration > 0 && canShake)
 		{
 			camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 			
@@ -42,5 +53,16 @@ public class CameraShake : MonoBehaviour
 			shakeDuration = 0f;
 			camTransform.localPosition = originalPos;
 		}
+	}
+
+	public void SetNewShake(float duration, float amount=0.7f, bool finalShake=false)
+	{
+		if (!GameDone)
+		{
+            shakeDuration = duration;
+            shakeAmount = amount;
+            GameDone = finalShake;
+        }
+		
 	}
 }

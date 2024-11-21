@@ -50,13 +50,12 @@ public class PlayerHealth : MonoBehaviour
         
         SetHealthBar();
 
-        FindObjectOfType<CameraShake>().shakeDuration += 0.1f;
+        Camera.main.GetComponent<CameraShake>().SetNewShake(0.1f);
 
         if (health <= 0)
         {
             PlayerPrefs.SetInt("losses", PlayerPrefs.GetInt("losses")+1);
-            Camera.main.GetComponent<CameraShake>().shakeDuration += 0.5f;
-            Camera.main.GetComponent<CameraShake>().shakeAmount += 0.3f;
+            Camera.main.GetComponent<CameraShake>().SetNewShake(0.5f, 1f, true);
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
             var particles = Instantiate(ParticlesOnDefeat, transform.position, Quaternion.identity);

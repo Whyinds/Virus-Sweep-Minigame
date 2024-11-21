@@ -4,6 +4,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI winHighscoreText;
 
+    Toggle camShakeToggle;
+
     private void Awake()
     {
         Instance = this;
@@ -36,7 +39,16 @@ public class GameManager : MonoBehaviour
         {
             WinCanvas.SetActive(false);
         }
-        
+
+        if (!PlayerPrefs.HasKey("Shake"))
+        {
+            PlayerPrefs.SetInt("Shake", 1);
+        }
+    }
+
+    private void Start()
+    {
+        camShakeToggle = FindObjectOfType<Toggle>();
     }
 
     public void TriShotUpgrade(float duration=10f)
@@ -92,6 +104,7 @@ public class GameManager : MonoBehaviour
         if (bossesDefeated >= bossesToWin)
         {
             wonGame = true;
+            Camera.main.gameObject.GetComponent<CameraShake>().GameDone = true;
             foreach (var enemy in FindObjectsOfType<Enemy>())
             {
                 enemy.gameObject.SetActive(false);
@@ -118,8 +131,7 @@ public class GameManager : MonoBehaviour
 
             PlayerShooter.instance.StopPlayer();
 
-            WinCanvas.SetActive(true);
-            SetWinScore();
+            StartCoroutine(ShowWinScreen());
         }
     }
 
@@ -142,6 +154,18 @@ public class GameManager : MonoBehaviour
         {
             winHighscoreText.SetText("Highscore: " + PlayerPrefs.GetInt("HighScore", 0));
         }
+    }
+
+    IEnumerator ShowWinScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        SetWinScore();
+    }
+
+    public void EnablingCameraShake()
+    {
+        int TF_int = camShakeToggle.isOn ? 1 : 0;
+        PlayerPrefs.SetInt("Shake", TF_int);
     }
 
 }

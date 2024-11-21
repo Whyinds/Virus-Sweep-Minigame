@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
         
         if (health <= 0) {
             isDead = true;
+            Camera.main.GetComponent<CameraShake>().SetNewShake(0.05f, 0.1f);
             DisplayScoreAdded(bullet);
             onDestroyAudio.OnDelete();
             var particles = Instantiate(ParticlesOnDefeat, transform.position, Quaternion.identity);

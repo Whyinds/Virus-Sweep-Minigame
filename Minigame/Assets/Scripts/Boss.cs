@@ -18,7 +18,7 @@ public class Boss : Enemy
     {
         if (isDead)
         {
-            Camera.main.GetComponent<CameraShake>().shakeDuration += 0.5f;
+            Camera.main.GetComponent<CameraShake>().SetNewShake(0.5f, 0.7f);
             GameManager.Instance.BossWin();
         }    
     }
