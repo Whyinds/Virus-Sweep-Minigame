@@ -44,11 +44,23 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Shake", 1);
         }
+
+        
     }
 
     private void Start()
     {
         camShakeToggle = FindObjectOfType<Toggle>();
+        if (camShakeToggle != null) {
+            if (PlayerPrefs.GetInt("Shake") == 1)
+            {
+                camShakeToggle.isOn = true;
+            }
+            else
+            {
+                camShakeToggle.isOn = false;
+            }
+        }
     }
 
     public void TriShotUpgrade(float duration=10f)
@@ -84,6 +96,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerHealth.OnGameOver -= AddCoins;
         }
+
+        
     }
 
     void AddCoins()
@@ -137,6 +151,7 @@ public class GameManager : MonoBehaviour
 
     void SetWinScore()
     {
+        ProgressManager.Instance.UpdateProgress();
         WinCanvas.SetActive(true);
         winScoreText.SetText("Score: " + ScoreManager.instance.score);
         coinText.SetText("Total Credits: " + PlayerPrefs.GetInt("coins"));
