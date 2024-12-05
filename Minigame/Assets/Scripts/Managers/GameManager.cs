@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int bossesDefeated = 0;
     public int bossesToWin = 3;
 
+    public float globalEnemySpeed = 1f;
+
     public bool wonGame = false;
 
     public GameObject WinCanvas;
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI winHighscoreText;
 
     Toggle camShakeToggle;
+
+    public AudioSource winAudio;
+    public AudioSource loseAudio;
 
     private void Awake()
     {
@@ -114,10 +119,13 @@ public class GameManager : MonoBehaviour
     public void BossWin()
     {
         bossesDefeated++;
-        
+
+        ProgressManager.Instance.UpdateProgress();
+
         if (bossesDefeated >= bossesToWin)
         {
             wonGame = true;
+            winAudio.Play();
             Camera.main.gameObject.GetComponent<CameraShake>().GameDone = true;
             foreach (var enemy in FindObjectsOfType<Enemy>())
             {
@@ -181,6 +189,18 @@ public class GameManager : MonoBehaviour
     {
         int TF_int = camShakeToggle.isOn ? 1 : 0;
         PlayerPrefs.SetInt("Shake", TF_int);
+    }
+
+    public void StopEnemiesPower()
+    {
+        StartCoroutine(ChangeEnemySpeed());
+    }
+
+    IEnumerator ChangeEnemySpeed()
+    {
+        globalEnemySpeed = 0;
+        yield return new WaitForSeconds(3f);
+        globalEnemySpeed = 1;
     }
 
 }

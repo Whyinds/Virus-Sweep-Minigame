@@ -21,9 +21,12 @@ public class ProgressManager : MonoBehaviour
 
     public void UpdateProgress()
     {
-        if (GameManager.Instance.bossesToWin < GameManager.Instance.bossesDefeated)
+        Debug.Log(GameManager.Instance.bossesDefeated);
+
+        if (GameManager.Instance.bossesDefeated < GameManager.Instance.bossesToWin)
         {
             progressText.SetText("Sweeping... (" + GameManager.Instance.bossesDefeated + "/" + GameManager.Instance.bossesToWin + ")");
+            
         } else
         {
             progressText.SetText("Sweep Complete!");

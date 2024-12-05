@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
     public Image healthbarFill;
 
     public AudioSource hitAudio;
+    public AudioSource bigHitAudio;
+
     public GameObject gameOverAudioObject;
 
     public static event Action OnGameOver;
@@ -55,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             PlayerPrefs.SetInt("losses", PlayerPrefs.GetInt("losses")+1);
+            GameManager.Instance.loseAudio.Play();
             Camera.main.GetComponent<CameraShake>().SetNewShake(0.5f, 1f, true);
             gameOverUI.enabled = true;
             OnGameOver.Invoke();
@@ -66,7 +69,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        if (hitAudio != null) { hitAudio.Play(); }
+        if (damage > 2) { bigHitAudio.Play(); }
+        else if (hitAudio != null) { hitAudio.Play(); }
     }
 
     public void GainHealth(int restored)

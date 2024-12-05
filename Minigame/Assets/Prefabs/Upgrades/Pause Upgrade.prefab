@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1365361705240369602}
   - component: {fileID: 2301951762405743806}
   - component: {fileID: 4498094178192023179}
-  - component: {fileID: -3891720715491293365}
   - component: {fileID: 878601069652737686}
+  - component: {fileID: -6105442031463563676}
   m_Layer: 0
-  m_Name: Tri Upgrade
+  m_Name: Pause Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 53c4668823342cc4e8115e986544ef90, type: 3}
-  m_Color: {r: 0.11374402, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d59fb717023d2e34289da6c920d95296, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,20 +128,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-3891720715491293365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377719292743648790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63192e5524e702f49b632a4091fa0c55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1.5
-  MiniTextUpgradeDisplay: {fileID: 754410271099227886, guid: 7680ad33738b1f94b984f14e48cae85d, type: 3}
 --- !u!61 &878601069652737686
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -187,3 +173,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &-6105442031463563676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377719292743648790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975f9447b62752143849309cf3961a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  MiniTextUpgradeDisplay: {fileID: 754410271099227886, guid: d3f2c83445ccae541af74e0419d11490, type: 3}

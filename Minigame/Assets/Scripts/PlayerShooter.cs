@@ -17,6 +17,7 @@ public class PlayerShooter : MonoBehaviour
     public float launchSpeed = 10f;
     public float maxProjectiles = 3f;
     [HideInInspector] public float currentProjectiles = 0f;
+    public Color TriShotColor = Color.green;
 
     [Header("***Power Up Potential***")]
     public float maxProjectileUpgrade = 3f;
@@ -78,9 +79,17 @@ public class PlayerShooter : MonoBehaviour
             {
                 var _projectileTwo = Instantiate(projectile, launchPoint.position, launchPoint.rotation *= Quaternion.Euler(0, 0, 15));
                 _projectileTwo.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+                _projectileTwo.GetComponent<Projectile>().original = false;
+                _projectileTwo.GetComponent<SpriteRenderer>().color = TriShotColor;
+                _projectileTwo.GetComponentInChildren<TrailRenderer>().startColor = TriShotColor;
+                _projectileTwo.GetComponentInChildren<TrailRenderer>().endColor = TriShotColor;
 
                 var _projectileThree = Instantiate(projectile, launchPoint.position, launchPoint.rotation *= Quaternion.Euler(0, 0, -30));
                 _projectileThree.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+                _projectileThree.GetComponent<Projectile>().original = false;
+                _projectileThree.GetComponent<SpriteRenderer>().color = TriShotColor;
+                _projectileThree.GetComponentInChildren<TrailRenderer>().startColor = TriShotColor;
+                _projectileThree.GetComponentInChildren<TrailRenderer>().endColor = TriShotColor;
 
                 launchPoint.rotation *= Quaternion.Euler(0, 0, 15);
             }
@@ -97,7 +106,7 @@ public class PlayerShooter : MonoBehaviour
 
     public void CountProjectile()
     {
-        currentProjectiles = FindObjectsOfType<Projectile>().Length;
+        currentProjectiles--;
         CheckAnimation();
     }
 

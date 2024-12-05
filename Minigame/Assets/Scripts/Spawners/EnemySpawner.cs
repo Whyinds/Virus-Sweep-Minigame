@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         waitingToSpawn = false;
 
         // If game over while waiting
-        if (spawnEnemy)
+        if (spawnEnemy && GameManager.Instance.globalEnemySpeed != 0)
         {
             if (currentWave % wavesToBoss != 0 || currentWave < wavesToBoss)
             {

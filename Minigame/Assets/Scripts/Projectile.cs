@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     public AudioSource bounceAudio;
     OnDestroyAudio onDestroyAudio;
 
+    public bool original = true;
+
     private Vector3 lastVelocity;
     private float curSpeed;
     private Vector3 direction;
@@ -24,6 +26,7 @@ public class Projectile : MonoBehaviour
     [Header("Bounce Boosts")]
     public float speedMultiplier = 1.25f;
     public float damageMultiplier = 2f;
+
 
     private void Start()
     {
@@ -87,7 +90,11 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.CountProjectile();
+        if (original)
+        {
+            player.CountProjectile();
+        }
+        
     }
 
 }

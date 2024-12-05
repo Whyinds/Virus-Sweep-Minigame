@@ -106,6 +106,7 @@ MonoBehaviour:
   damage: 1
   numOfBounces: 4
   bounceAudio: {fileID: 1162138509423838985}
+  original: 1
   curBounces: 0
   curEnemiesHit: 0
   speedMultiplier: 1.25

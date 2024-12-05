@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     void MoveDown()
     {
-        transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector2.down * moveSpeed * GameManager.Instance.globalEnemySpeed * Time.deltaTime);
     }
 
     public void LoseHealth(int damage = 1, Projectile bullet = null)
