@@ -35,6 +35,8 @@ public class Projectile : MonoBehaviour
         onDestroyAudio = GetComponent<OnDestroyAudio>();
 
         PlayerHealth.OnGameOver += DeleteProjectile;
+
+        StartCoroutine(FailSafeToDestroy());
     }
 
     private void LateUpdate()
@@ -90,11 +92,18 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
+        StopAllCoroutines();
         if (original)
         {
             player.CountProjectile();
         }
         
+    }
+
+    IEnumerator FailSafeToDestroy()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 
 }

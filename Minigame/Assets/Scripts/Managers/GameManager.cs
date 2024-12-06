@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -122,10 +121,10 @@ public class GameManager : MonoBehaviour
 
         ProgressManager.Instance.UpdateProgress();
 
-        if (bossesDefeated >= bossesToWin)
+        if (bossesDefeated >= bossesToWin && !wonGame)
         {
             wonGame = true;
-            winAudio.Play();
+            
             Camera.main.gameObject.GetComponent<CameraShake>().GameDone = true;
             foreach (var enemy in FindObjectsOfType<Enemy>())
             {
@@ -181,6 +180,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowWinScreen()
     {
+        winAudio.Play();
         yield return new WaitForSeconds(1f);
         SetWinScore();
     }
