@@ -12,5 +12,5 @@ This is the project's assets and code, although I learned better programming ski
 <b>Link to game: https://whyinds.itch.io/virus-sweep</b>
 
 ## How to play
-Use your mouse to aim and and click to shoot projectiles at incoming enemies. Your ball can pierce some enemies and bounce off walls, scoring points. After you defeat 3 bosses (clippy) you win! If the enemies get to your files and damage it enough, you lose!
+Use your mouse to aim and and click to shoot projectiles at incoming enemies. Your ball can pierce some enemies and bounce off walls, scoring points. After you defeat 3 bosses (paperclip) you win! If the enemies get to your files and damage it enough, you lose!
 You can also gain coins to change your wallpaper
